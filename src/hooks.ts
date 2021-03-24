@@ -50,12 +50,40 @@ export const useDimension = () => {
         }
         return () => {
             window.onresize = () => {
-                
+
             }
         }
     })
     return {
         w, 
         h
+    }
+}
+
+export const useStyle = (w : number, h : number, scale : number, n : number) => {
+    const size : number = Math.min(w, h) / 2
+    return {
+        holderStyle() {
+            return {
+                width : `${size}px`,
+                height : `${size / 5 + (size / 5) * n * scale}px`,
+                overflow: 'clip',
+                background : 'orange'
+            }
+        },
+        parentStyle() {
+            return {
+                float : 'top'
+            }
+        },
+        barStyle() {
+            return {
+                width : `${size}px`,
+                height: `${size / 5}px`,
+                textAlign: 'center',
+                background : 'teal',
+                color : 'white'
+            }
+        }
     }
 }
