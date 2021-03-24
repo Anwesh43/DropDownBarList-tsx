@@ -1,7 +1,8 @@
 import {
     useState, 
-    useEffect
-} from 'React'
+    useEffect,
+    CSSProperties
+} from 'react'
 
 const delay : number = 20 
 const scGap : number = 0.02 
@@ -61,22 +62,25 @@ export const useDimension = () => {
 }
 
 export const useStyle = (w : number, h : number, scale : number, n : number) => {
-    const size : number = Math.min(w, h) / 2
+    const size : number = 100
+    console.log(scale, size / 5, size / 5 + (size / 5) * n * scale)
     return {
-        holderStyle() {
+        holderStyle() : CSSProperties {
             return {
                 width : `${size}px`,
-                height : `${size / 5 + (size / 5) * n * scale}px`,
+                height : `${size / 5 + (size / 5) * (n - 1) * scale}px`,
+                maxHeight: `${size / 5 + (size / 5) * n * scale}px`,
                 overflow: 'clip',
                 background : 'orange'
             }
         },
-        parentStyle() {
+        parentStyle() : CSSProperties{
             return {
-                float : 'top'
+                display : 'flex',
+                flexDirection: 'column'
             }
         },
-        barStyle() {
+        barStyle() : CSSProperties {
             return {
                 width : `${size}px`,
                 height: `${size / 5}px`,
