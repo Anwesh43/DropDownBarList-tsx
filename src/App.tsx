@@ -1,24 +1,32 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import DropDownBarList from './DropdownBarList'
+import {useStyle, useAnimatedScale, useDimension} from './hooks'
 
 function App() {
+  const {w, h} = useDimension()
+  const {scale, start} = useAnimatedScale()
+  const {barStyle} = useStyle(w, h, scale, 0)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <DropDownBarList w = {w} h = {w} scale = {scale} onClick = {start}>
+            <div style = {barStyle()}>
+                Hello
+            </div>
+            <div style = {barStyle()}>
+                Hello1
+            </div>
+            <div style = {barStyle()}>
+                Hello2
+            </div>
+            <div style = {barStyle()}>
+                Hello3
+            </div>
+            <div style = {barStyle()}>
+                Hello4
+            </div>
+        </DropDownBarList>
     </div>
   );
 }
